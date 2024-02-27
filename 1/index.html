@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="first">
+        <div class="second">
+            <div class="second-first">
+                <p class="first-text"></p>
+                <h5 class="second-second"></h5>
+                <h5 class="text"></h5>
+            </div>
+            <div class="second-second">
+                <p class="second-second"></p>
+                <p class="first-text"></p>
+                <h1 class="text"></h1>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+
+        // 1) Дан массив const arr = [1, 5, 7, 9] с помощью Math.min и spread оператора, найти минимальное число в массиве, решение задание должно состоять из одной строки
+
+        const arr = [1, 5, 7, 9]
+        console.log(Math.min(...arr));
+
+        // 2) Напишите функцию createCounter, которая создает счетчик и возвращает объект с двумя методами: increment и decrement. Метод increment должен увеличивать значение счетчика на 1, а метод decrement должен уменьшать значение счетчика на 1. Значение счетчика должно быть доступно только через методы объекта, а не напрямую.
+
+        function createCounter(count) {
+            let counter = count
+            function increment() {
+                return counter++
+            }
+            function decrement() {
+                return counter--
+            }
+            return {
+                increment: increment,
+                decrement: decrement
+            }
+        }
+
+        let count = createCounter(10)
+        console.log(count.increment());
+        console.log(count.increment());
+        console.log(count.increment());
+        console.log(count.decrement());
+        console.log(count.decrement());
+        console.log(count.decrement());
+
+
+        // 3) Напишите рекурсивную функцию findElementByClass, которая принимает корневой элемент дерева DOM и название класса в качестве аргументов и возвращает первый найденный элемент с указанным классом в этом дереве.
+        let searchElement = [];
+        function findElementByClass(rootEl, classEl) {
+            if (rootEl.hasChildNodes()) {
+                for (let element of rootEl.children) {
+                    if (element.className === classEl) {
+                        searchElement.push(element);
+                        if (searchElement[0].className !== classEl) {
+                            searchElement = [];
+                            searchElement.push(element);
+                        }
+                    }
+                    findElementByClass(element, classEl);
+                }
+            }
+            return searchElement[0];
+        }
+        const rootElement = document.querySelector('div');
+        console.log(findElementByClass(rootElement, 'second-second'));
+
+    </script>
+
+</body>
+
+</html>
